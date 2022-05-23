@@ -6,6 +6,7 @@ nama = [
     "Erwin",
     "Najwa",
     "Kanaya",
+    "Rafi"
     ]
 
 tim = int(input("Jumlah Kelompok: "))
