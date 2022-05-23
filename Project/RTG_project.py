@@ -9,7 +9,7 @@ nama = [
     "Kya"
     ]
 
-tim = int(input("Jumlah Kelompok: "))
+tim = int(input("Banyak Kelompok: "))
 member = len(nama)//tim
 lebih = len(nama) % tim
 
