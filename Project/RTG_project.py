@@ -12,7 +12,7 @@ tim = int(input("Jumlah Kelompok: "))
 member = len(nama)//tim
 lebih = len(nama) % tim
 
-keluar = []
+sudah = []
 
 def tampilkanNama():
     nomor = random.randrange(len(nama)) #randomnya antara 0 sampai 27
