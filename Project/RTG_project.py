@@ -15,7 +15,7 @@ lebih = len(nama) % tim
 keluar = []
 
 def tampilkanNama():
-    nomor = random.randrange(len(nama)) #randomnya antara 0 sampai 27
+    nomor = random.randrange(len(nama))
     if len(keluar) == 0:
         print("\t\t", nama[nomor])
         keluar.append(nomor)
