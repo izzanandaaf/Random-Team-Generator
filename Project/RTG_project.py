@@ -5,7 +5,8 @@ import random
 def main():
     mainform = tkinter.Tk()
     mainform.title("Random Team Generator")
-    mainform.geometry("342x342")
+    mainform.maxsize(342,342)
+    mainform.minsize(342,342)
     var1 = tkinter.StringVar()
     var2 = tkinter.StringVar()
     memb_list = []
@@ -126,7 +127,7 @@ def main():
     l1 = tkinter.Label(
                     mainform, 
                     text="RANDOM TEAM GENERATOR", 
-                    font=('', 14, "bold italic")
+                    font=('', 16, "bold italic")
                     )
     l1.grid(row=0, column=1, columnspan=6, sticky=tkinter.W+tkinter.E, pady=18)
 
