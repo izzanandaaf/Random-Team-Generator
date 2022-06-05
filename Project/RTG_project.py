@@ -10,7 +10,7 @@ def main():
     var1 = tkinter.StringVar()
     var2 = tkinter.StringVar()
     memb_list = []
-    
+
     def add_to_list():
         if var1.get() != '':
             memb_list.append(var1.get())
@@ -207,6 +207,7 @@ def main():
     b5.grid(row=8, column=1, columnspan=2, sticky=tkinter.W, padx=4, pady=10)
 
     mainform.mainloop()
+
 
 if __name__ == '__main__':
     main()
