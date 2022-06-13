@@ -23,23 +23,23 @@ def main():
         if len(memb_list) != 0:
             listform = tkinter.Tk()
             listform.title('My List')
-            my_list = tkinter.Label(
+            listform.maxsize(215,230)
+            listform.minsize(215,230)
+            judul = tkinter.Label(
                                 listform, 
                                 text="MY LIST", 
                                 font=('',10,'underline')
                                 )
-            my_list.grid(row=0, column=2, columnspan=2, padx=90, pady=6)
-            for n in range(len(memb_list)):
-                num_list = tkinter.Label(
-                    listform, 
-                    text=str(n+1)+'.'
-                    )
-                num_list.grid(row=(n+1), column=1, sticky=tkinter.W, padx=4)
-                name_list = tkinter.Label(
-                    listform, 
-                    text=str(memb_list[n])
-                    )
-                name_list.grid(row=(n+1), column=2, sticky=tkinter.W, padx=4)
+            judul.pack(pady=10)
+            my_frame = tkinter.Frame(listform)
+            my_sb = tkinter.Scrollbar(my_frame,orient="vertical")
+            my_listbox = tkinter.Listbox(my_frame,width=28,yscrollcommand=my_sb.set)
+            my_sb.config(command=my_listbox.yview)
+            my_sb.pack(side="right",fill="y")
+            my_frame.pack()
+            my_listbox.pack()
+            for item in memb_list:
+                my_listbox.insert("end", item)
             listform.mainloop()
         else:
             tkinter.messagebox.showinfo("Error", 'No data added to your list.')
