@@ -19,12 +19,12 @@ def main():
         else:
             tkinter.messagebox.showinfo("Error", 'No data added.')
 
-    def check_my_list():
+    def edit_list():
         if len(memb_list) != 0:
             listform = tkinter.Tk()
             listform.title('My List')
-            listform.maxsize(215,230)
-            listform.minsize(215,230)
+            listform.maxsize(215,280)
+            listform.minsize(215,280)
             judul = tkinter.Label(
                                 listform, 
                                 text="MY LIST", 
@@ -38,6 +38,10 @@ def main():
             my_sb.pack(side="right",fill="y")
             my_frame.pack()
             my_listbox.pack()
+            delbtn = tkinter.Button(listform, text='Delete Item(s)',width=11)
+            delbtn.pack()
+            delallbtn = tkinter.Button(listform, text='Delete All',width=11)
+            delallbtn.pack()
             for item in memb_list:
                 my_listbox.insert("end", item)
             listform.mainloop()
@@ -154,19 +158,11 @@ def main():
 
     b2 = tkinter.Button(
                     mainform, 
-                    text="Check list", 
-                    command=check_my_list, 
-                    width=10
+                    text="Edit my list", 
+                    command=edit_list, 
+                    width=18
                     )
-    b2.grid(row=3, column=3, sticky=tkinter.W+tkinter.E)
-
-    b3 = tkinter.Button(
-                    mainform, 
-                    text="Reset list", 
-                    command=reset_list,
-                    width=10
-                    )
-    b3.grid(row=3, column=4, sticky=tkinter.W+tkinter.E)
+    b2.grid(row=3, column=1, columnspan=6)
 
     tkinter.Label(mainform, text="").grid(row=4)
 
@@ -181,14 +177,14 @@ def main():
                     mainform, 
                     text='Number of Groups: '
                     )
-    l4.grid(row=6, column=1, columnspan=4, sticky=tkinter.W+tkinter.E)
+    l4.grid(row=6, column=1, columnspan=3, sticky=tkinter.E)
 
     e2 = tkinter.Entry(
                     mainform, 
                     textvariable=var2,
-                    width=6
+                    width=14
                     )
-    e2.grid(row=6, column=4)
+    e2.grid(row=6, column=4, columnspan=3, sticky=tkinter.W)
 
     b4 = tkinter.Button(
                     mainform, 
