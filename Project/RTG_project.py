@@ -20,40 +20,48 @@ def main():
             tkinter.messagebox.showinfo("Error", 'No data added.')
 
     def edit_list():
+        def del_all():
+            my_listbox.delete(0,"end")
+            memb_list.clear()
+            tkinter.messagebox.showinfo("Info", 'All data deleted succesfuly.')
+        def del_selection():
+            if len(my_listbox.curselection()) == 0:
+                tkinter.messagebox.showinfo("Info", 'You have not selected any data to delete.')
+            else:
+                for data in reversed(my_listbox.curselection()):
+                    my_listbox.delete(data)
+                    memb_list.pop(data)
+                tkinter.messagebox.showinfo("Info", 'Selected data deleted succesfuly.')
         if len(memb_list) != 0:
             listform = tkinter.Tk()
             listform.title('My List')
-            listform.maxsize(215,280)
-            listform.minsize(215,280)
+            listform.maxsize(215,350)
+            listform.minsize(215,350)
             judul = tkinter.Label(
                                 listform, 
                                 text="MY LIST", 
-                                font=('',10,'underline')
+                                font=('',10,'bold')
                                 )
             judul.pack(pady=10)
             my_frame = tkinter.Frame(listform)
             my_sb = tkinter.Scrollbar(my_frame,orient="vertical")
-            my_listbox = tkinter.Listbox(my_frame,width=28,yscrollcommand=my_sb.set)
+            my_listbox = tkinter.Listbox(my_frame,width=28,yscrollcommand=my_sb.set,selectmode="extended")
             my_sb.config(command=my_listbox.yview)
             my_sb.pack(side="right",fill="y")
             my_frame.pack()
             my_listbox.pack()
-            delbtn = tkinter.Button(listform, text='Delete Item(s)',width=11)
-            delbtn.pack()
-            delallbtn = tkinter.Button(listform, text='Delete All',width=11)
+            f_btn = tkinter.Frame(listform)
+            f_btn.pack()
+            delbtn = tkinter.Button(f_btn,text='Delete Item(s)',width=11,command=del_selection)
+            delbtn.pack(side='left',anchor='w')
+            delallbtn = tkinter.Button(f_btn,text='Delete All',width=11,command=del_all)
             delallbtn.pack()
+            
             for item in memb_list:
                 my_listbox.insert("end", item)
             listform.mainloop()
         else:
             tkinter.messagebox.showinfo("Error", 'No data added to your list.')
-            
-    def reset_list():
-        if len(memb_list) != 0:
-            memb_list.clear()
-            tkinter.messagebox.showinfo("Info", 'List has been reset succesfuly.')
-        else:
-            tkinter.messagebox.showinfo("Error", 'No data found on your list.')
 
     def start_random():
         if len(memb_list) == 0:
