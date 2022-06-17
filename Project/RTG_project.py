@@ -14,11 +14,11 @@ def main():
     var1 = tkinter.StringVar()
     var2 = tkinter.StringVar()
     memb_list = []
-    path = os.getcwd()
+    path = os.path.dirname(os.path.realpath(__file__))
 
     def use_listA():
         memb_list.clear()
-        all_list = open("{}/Project/list_library/datalistA.csv".format(path),"r")
+        all_list = open("{}\\list_library\\datalistA.csv".format(path),"r")
         csv_reader = csv.reader(all_list)
         for row in csv_reader:
             for i in range(len(row)):
@@ -29,7 +29,7 @@ def main():
             tkinter.messagebox.showinfo("Info", 'You are now using the data stored in the "List A".')
     def use_listB():
         memb_list.clear()
-        all_list = open("{}/Project/list_library/datalistB.csv".format(path),"r")
+        all_list = open("{}\\list_library\\datalistB.csv".format(path),"r")
         csv_reader = csv.reader(all_list)
         for row in csv_reader:
             for i in range(len(row)):
@@ -40,7 +40,7 @@ def main():
             tkinter.messagebox.showinfo("Info", 'You are now using the data stored in the "List B".')
     def use_listC():
         memb_list.clear()
-        all_list = open("{}/Project/list_library/datalistC.csv".format(path),"r")
+        all_list = open("{}\\list_library\\datalistC.csv".format(path),"r")
         csv_reader = csv.reader(all_list)
         for row in csv_reader:
             for i in range(len(row)):
@@ -51,28 +51,28 @@ def main():
             tkinter.messagebox.showinfo("Info", 'You are now using the data stored in the "List C".')
     def save_listA():
         if len(memb_list) == 0:
-            A = open("{}/Project/list_library/datalistA.csv".format(path),'r+')
+            A = open("{}\\list_library\\datalistA.csv".format(path),'r+')
             A.truncate(0)
         else:
-            with open("{}/Project/list_library/datalistA.csv".format(path), 'w', newline='') as sA:
+            with open("{}\\list_library\\datalistA.csv".format(path), 'w', newline='') as sA:
                 writerA = csv.writer(sA)
                 writerA.writerow(memb_list)
         tkinter.messagebox.showinfo("Info", 'Data saved in "List A" successfuly.')
     def save_listB():
         if len(memb_list) == 0:
-            B = open("{}/Project/list_library/datalistB.csv".format(path),'r+')
+            B = open("{}\\list_library\\datalistB.csv".format(path),'r+')
             B.truncate(0)
         else:
-            with open("{}/Project/list_library/datalistB.csv".format(path), 'w',newline='') as sB:
+            with open("{}\\list_library\\datalistB.csv".format(path), 'w',newline='') as sB:
                 writerB = csv.writer(sB)
                 writerB.writerow(memb_list)
         tkinter.messagebox.showinfo("Info", 'Data saved in "List B" successfuly.')
     def save_listC():
         if len(memb_list) == 0:
-            C = open("{}/Project/list_library/datalistC.csv".format(path),'r+')
+            C = open("{}\\list_library\\datalistC.csv".format(path),'r+')
             C.truncate(0)
         else:
-            with open("{}/Project/list_library/datalistC.csv".format(path), 'w',newline='') as sC:
+            with open("{}\\list_library\\datalistC.csv".format(path), 'w',newline='') as sC:
                 writerC = csv.writer(sC)
                 writerC.writerow(memb_list)
         tkinter.messagebox.showinfo("Info", 'Data saved in "List C" successfuly.')
