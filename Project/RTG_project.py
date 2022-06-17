@@ -1,6 +1,8 @@
 import tkinter
 import tkinter.messagebox
+from tkinter import ttk
 import random
+import csv
 
 def main():
     mainform = tkinter.Tk()
@@ -11,14 +13,73 @@ def main():
     var2 = tkinter.StringVar()
     memb_list = []
 
+    def use_listA():
+        memb_list.clear()
+        all_list = open("Project/list_library/datalistA.csv","r")
+        csv_reader = csv.reader(all_list)
+        for row in csv_reader:
+            for i in range(len(row)):
+                memb_list.append(row[i])
+        if len(memb_list) == 0:
+            tkinter.messagebox.showinfo("Info", '"List A" is still empty.\nYour list is now empty.')
+        else:
+            tkinter.messagebox.showinfo("Info", 'You are now using the data stored in the "List A".')
+    def use_listB():
+        memb_list.clear()
+        all_list = open("Project/list_library/datalistB.csv","r")
+        csv_reader = csv.reader(all_list)
+        for row in csv_reader:
+            for i in range(len(row)):
+                memb_list.append(row[i])
+        if len(memb_list) == 0:
+            tkinter.messagebox.showinfo("Info", '"List B" is still empty.\nYour list is now empty.')
+        else:
+            tkinter.messagebox.showinfo("Info", 'You are now using the data stored in the "List B".')
+    def use_listC():
+        memb_list.clear()
+        all_list = open("Project/list_library/datalistC.csv","r")
+        csv_reader = csv.reader(all_list)
+        for row in csv_reader:
+            for i in range(len(row)):
+                memb_list.append(row[i])
+        if len(memb_list) == 0:
+            tkinter.messagebox.showinfo("Info", '"List C" is still empty.\nYour list is now empty.')
+        else:
+            tkinter.messagebox.showinfo("Info", 'You are now using the data stored in the "List C".')
+    def save_listA():
+        if len(memb_list) == 0:
+            A = open('Project/list_library/datalistA.csv','r+')
+            A.truncate(0)
+        else:
+            with open('Project/list_library/datalistA.csv', 'w', newline='') as sA:
+                writerA = csv.writer(sA)
+                writerA.writerow(memb_list)
+        tkinter.messagebox.showinfo("Info", 'Data saved in "List A" successfuly.')
+    def save_listB():
+        if len(memb_list) == 0:
+            B = open('Project/list_library/datalistB.csv','r+')
+            B.truncate(0)
+        else:
+            with open('Project/list_library/datalistB.csv', 'w',newline='') as sB:
+                writerB = csv.writer(sB)
+                writerB.writerow(memb_list)
+        tkinter.messagebox.showinfo("Info", 'Data saved in "List B" successfuly.')
+    def save_listC():
+        if len(memb_list) == 0:
+            C = open('Project/list_library/datalistC.csv','r+')
+            C.truncate(0)
+        else:
+            with open('Project/list_library/datalistC.csv', 'w',newline='') as sC:
+                writerC = csv.writer(sC)
+                writerC.writerow(memb_list)
+        tkinter.messagebox.showinfo("Info", 'Data saved in "List C" successfuly.')
     def add_to_list():
         if var1.get() != '':
             memb_list.append(var1.get())
-            tkinter.messagebox.showinfo("Info", f'"{var1.get()}" added succesfuly.')
+            tkinter.messagebox.showinfo("Info", f'"{var1.get()}" added succesfully.')
             var1.set('')
         else:
             tkinter.messagebox.showinfo("Error", 'No data added.')
-
     def edit_list():
         def del_all():
             my_listbox.delete(0,"end")
@@ -56,7 +117,16 @@ def main():
             delbtn.pack(side='left',anchor='w')
             delallbtn = tkinter.Button(f_btn,text='Delete All',width=11,command=del_all)
             delallbtn.pack()
-            
+            tkinter.Label(listform,text="").pack()
+            tkinter.Label(listform,text="Save as:").pack()
+            f_btn2 = tkinter.Frame(listform)
+            f_btn2.pack()
+            saA = tkinter.Button(f_btn2,text='List A',width=11,command=save_listA)
+            saA.pack(side='left',anchor='w')
+            saB = tkinter.Button(f_btn2,text='List B',width=11,command=save_listB)
+            saB.pack(side='right',anchor='w')
+            saB = tkinter.Button(listform,text='List C',width=11,command=save_listC)
+            saB.pack()
             for item in memb_list:
                 my_listbox.insert("end", item)
             listform.mainloop()
@@ -83,15 +153,28 @@ def main():
                 overage = len(memb_list) % int(var2.get())
                 checker = []
                 tkinter.messagebox.showinfo("Info", 'Randomization successful.')
-                resultform = tkinter.Tk()
-                resultform.title("Result")
+                root = tkinter.Tk()
+                root.title("Groups Board")
+                root.maxsize(400, 450)
+                root.minsize(400, 450)
+                frame1 = tkinter.Frame(root)
+                frame1.pack(fill="both", expand=1)
+                canvas1 = tkinter.Canvas(frame1)
+                canvas1.pack(side="left", fill="both", expand=1)
+                sb2 = ttk.Scrollbar(frame1, orient="vertical", command=canvas1.yview)
+                sb2.pack(side="right", fill="y")
+                canvas1.configure(yscrollcommand=sb2.set)
+                canvas1.bind('<Configure>', lambda e: canvas1.configure(scrollregion=canvas1.bbox("all")))
+                secframe = tkinter.Frame(canvas1)
+                canvas1.create_window((0,0), window=secframe, anchor="nw")
                 def dstrbution():
                     num = random.randrange(len(memb_list))
                     if len(checker) == 0:
                         tkinter.Label(
-                                    resultform, 
-                                    text=memb_list[num]
-                                    ).grid(padx=15)
+                                    secframe, 
+                                    text=memb_list[num],
+                                    width=46
+                                    ).pack()
                         checker.append(num)
                     else:
                         for i in range(len(checker)):
@@ -102,28 +185,30 @@ def main():
                                 cek = True
                         if cek:
                             tkinter.Label(
-                                        resultform, 
-                                        text=memb_list[num]
-                                        ).grid(padx=15)
+                                        secframe, 
+                                        text=memb_list[num],
+                                        width=46
+                                        ).pack()
                             checker.append(num)
                         else:
                             dstrbution()
+                tkinter.Label(secframe, text='GROUPS BOARD', width=25, font=('', 16, "bold")).pack(pady=10)
                 for no_kel in range(int(var2.get())):
-                    tkinter.Label(resultform, text='').grid(padx=50)
                     tkinter.Label(
-                                resultform, 
+                                secframe, 
                                 text=f"TEAM {no_kel+1}", 
-                                font=('',10,'bold underline')
-                                ).grid(padx=100)
+                                font=('',10,'bold underline'),
+                                width=46
+                                ).pack()
                     if no_kel < overage:
                         for x in range(memb+1):
                             dstrbution()
                     else:
                         for x in range(memb):
                             dstrbution()
-                tkinter.Label(resultform, text='').grid(padx=50)
+                    tkinter.Label(secframe, text='', width=46).pack()
                 var2.set('')
-                resultform.mainloop()
+                root.mainloop()
 
     def credit():
         crdt_txt = (
@@ -187,11 +272,11 @@ def main():
                     )
     l3.grid(row=6, column=1, columnspan=6, sticky=tkinter.W+tkinter.E)
 
-    tkinter.Button(mainform,text="List A",width=15).grid(row=7,column=1,columnspan=6)
+    tkinter.Button(mainform,text="List A",width=15,command=use_listA).grid(row=7,column=1,columnspan=6)
 
-    tkinter.Button(mainform,text="List B",width=15).grid(row=8,column=1,columnspan=6)
+    tkinter.Button(mainform,text="List B",width=15,command=use_listB).grid(row=8,column=1,columnspan=6)
 
-    tkinter.Button(mainform,text="List C",width=15).grid(row=9,column=1,columnspan=6)
+    tkinter.Button(mainform,text="List C",width=15,command=use_listC).grid(row=9,column=1,columnspan=6)
 
     tkinter.Label(mainform, text="").grid(row=10)
 
