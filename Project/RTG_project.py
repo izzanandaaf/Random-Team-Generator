@@ -5,8 +5,8 @@ import random
 def main():
     mainform = tkinter.Tk()
     mainform.title("Random Team Generator")
-    mainform.maxsize(342,342)
-    mainform.minsize(342,342)
+    mainform.maxsize(342,490)
+    mainform.minsize(342,490)
     var1 = tkinter.StringVar()
     var2 = tkinter.StringVar()
     memb_list = []
@@ -166,9 +166,9 @@ def main():
 
     b2 = tkinter.Button(
                     mainform, 
-                    text="Edit my list", 
+                    text="Check my list", 
                     command=edit_list, 
-                    width=18
+                    width=15
                     )
     b2.grid(row=3, column=1, columnspan=6)
 
@@ -176,31 +176,47 @@ def main():
 
     l3 = tkinter.Label(
                     mainform, 
-                    text="SETTING", 
+                    text="LIBRARY", 
                     font=('',10,'underline')
                     )
     l3.grid(row=5, column=1, columnspan=6, sticky=tkinter.W+tkinter.E)
 
+    l3 = tkinter.Label(
+                    mainform, 
+                    text="Select the saved list that you will use!"
+                    )
+    l3.grid(row=6, column=1, columnspan=6, sticky=tkinter.W+tkinter.E)
+
+    tkinter.Button(mainform,text="List A",width=15).grid(row=7,column=1,columnspan=6)
+
+    tkinter.Button(mainform,text="List B",width=15).grid(row=8,column=1,columnspan=6)
+
+    tkinter.Button(mainform,text="List C",width=15).grid(row=9,column=1,columnspan=6)
+
+    tkinter.Label(mainform, text="").grid(row=10)
+
+    tkinter.Label(mainform, text="SETTING", font=('',10,'underline')).grid(row=11, column=1, columnspan=6, sticky=tkinter.W+tkinter.E)
+    
     l4 = tkinter.Label(
                     mainform, 
-                    text='Number of Groups: '
+                    text='Number of Groups:'
                     )
-    l4.grid(row=6, column=1, columnspan=3, sticky=tkinter.E)
+    l4.grid(row=12, column=3, sticky=tkinter.W)
 
     e2 = tkinter.Entry(
                     mainform, 
                     textvariable=var2,
-                    width=14
+                    width=11
                     )
-    e2.grid(row=6, column=4, columnspan=3, sticky=tkinter.W)
-
+    e2.grid(row=12, column=3, columnspan=2, sticky=tkinter.E)
+    
     b4 = tkinter.Button(
                     mainform, 
                     text="Start", 
                     width=10, 
                     command=start_random
                     )
-    b4.grid(row=7, column=1, columnspan=6, pady=34)
+    b4.grid(row=13, column=1, columnspan=6, pady=34)
 
     b5 = tkinter.Button(
                     mainform, 
@@ -208,7 +224,7 @@ def main():
                     width=2, 
                     command=credit
                     )
-    b5.grid(row=8, column=1, columnspan=2, sticky=tkinter.W, padx=4, pady=10)
+    b5.grid(row=14, column=1, columnspan=2, sticky=tkinter.W, padx=4, pady=10)
 
     mainform.mainloop()
 
